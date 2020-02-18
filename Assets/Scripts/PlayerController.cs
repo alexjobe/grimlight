@@ -13,7 +13,7 @@ enum Facing
 public class PlayerController : MonoBehaviour
 {
     public float normalMoveSpeed = 4f;
-    public float timeUntilIdle = 2f;
+    public float timeUntilIdle = 0.25f;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float activeMoveSpeed;
     private Facing facing;
     private float timeSinceLastInput = 0f;
+    private IEnumerator timeSinceLastInputCounter;
 
     void Start()
     {
@@ -29,7 +30,14 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         activeMoveSpeed = normalMoveSpeed;
         facing = Facing.Down;
+        StartTimeSinceLastInputCounter();
+    }
+
+    private void StartTimeSinceLastInputCounter()
+    {
         timeSinceLastInput = timeUntilIdle + 1;
+        timeSinceLastInputCounter = IncrementTimeSinceLastInput();
+        StartCoroutine(timeSinceLastInputCounter);
     }
 
     void Update()
@@ -40,22 +48,20 @@ public class PlayerController : MonoBehaviour
         UpdateAnimations();
     }
 
-    private void UpdateTimeSinceLastInput()
-    {
-        if (moveInput != Vector2.zero)
-        {
-            timeSinceLastInput = 0;
-            StopCoroutine(StartTimeSinceLastInputCounter());
-            StartCoroutine(StartTimeSinceLastInputCounter());
-        }
-    }
-
     private void UpdateMovement()
     {
         moveInput.x = Input.GetAxisRaw("HorizontalMove");
         moveInput.y = Input.GetAxisRaw("VerticalMove");
         moveInput.Normalize();
         rigidBody.velocity = moveInput * activeMoveSpeed;
+    }
+    
+    private void UpdateTimeSinceLastInput()
+    {
+        if (moveInput != Vector2.zero)
+        {
+            timeSinceLastInput = 0;
+        }
     }
 
     private void UpdateFacing()
@@ -106,9 +112,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator StartTimeSinceLastInputCounter()
+    public IEnumerator IncrementTimeSinceLastInput()
     {
-        while (timeSinceLastInput < timeUntilIdle)
+        while (true)
         {
             timeSinceLastInput += Time.deltaTime;
             yield return null;
