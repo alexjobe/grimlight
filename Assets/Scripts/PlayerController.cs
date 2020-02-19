@@ -13,16 +13,19 @@ enum Facing
 public class PlayerController : MonoBehaviour
 {
     public float normalMoveSpeed = 4f;
-    public float timeUntilIdle = 0.25f;
+    public float projectileCooldown = 0.5f;
+    public Projectile projectileToFire;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
 
-    private Vector2 moveInput;
-    private float activeMoveSpeed;
     private Facing facing;
-    private float timeSinceLastInput = 0f;
-    private IEnumerator timeSinceLastInputCounter;
+    private Vector2 moveInput;
+    private Vector2 aimInput;
+    private float activeMoveSpeed;
+    private bool canFire = true;
+    private bool isFiring = false;
+    private IEnumerator projectileCooldownCounter;
 
     void Start()
     {
@@ -30,21 +33,14 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         activeMoveSpeed = normalMoveSpeed;
         facing = Facing.Down;
-        StartTimeSinceLastInputCounter();
-    }
-
-    private void StartTimeSinceLastInputCounter()
-    {
-        timeSinceLastInput = timeUntilIdle + 1;
-        timeSinceLastInputCounter = IncrementTimeSinceLastInput();
-        StartCoroutine(timeSinceLastInputCounter);
     }
 
     void Update()
     {
         UpdateMovement();
-        UpdateTimeSinceLastInput();
+        UpdateAim();
         UpdateFacing();
+        ProcessFiring();
         UpdateAnimations();
     }
 
@@ -55,37 +51,92 @@ public class PlayerController : MonoBehaviour
         moveInput.Normalize();
         rigidBody.velocity = moveInput * activeMoveSpeed;
     }
-    
-    private void UpdateTimeSinceLastInput()
+
+    private void UpdateAim()
     {
-        if (moveInput != Vector2.zero)
-        {
-            timeSinceLastInput = 0;
-        }
+        aimInput.x = Input.GetAxisRaw("HorizontalAim");
+        aimInput.y = Input.GetAxisRaw("VerticalAim");
+        aimInput.Normalize();
+
+        isFiring = aimInput != Vector2.zero ? true : false;
     }
 
     private void UpdateFacing()
     {   
-        if(moveInput.x > 0)
+        if(canFire)
         {
-            facing = Facing.Right;
-        }
-        else if(moveInput.x < 0)
-        {
-            facing = Facing.Left;
-        }
-        else if(moveInput.y > 0)
-        {
-            facing = Facing.Up;
-        }
-        else if(moveInput.y < 0)
-        {
-            facing = Facing.Down;
+            if (aimInput.x > 0)
+            {
+                facing = Facing.Right;
+            }
+            else if (aimInput.x < 0)
+            {
+                facing = Facing.Left;
+            }
+            else if (aimInput.y < 0)
+            {
+                facing = Facing.Up;
+            }
+            else if (aimInput.y > 0)
+            {
+                facing = Facing.Down;
+            }
+            else if (moveInput.x > 0)
+            {
+                facing = Facing.Right;
+            }
+            else if (moveInput.x < 0)
+            {
+                facing = Facing.Left;
+            }
+            else if (moveInput.y > 0)
+            {
+                facing = Facing.Up;
+            }
+            else if (moveInput.y < 0)
+            {
+                facing = Facing.Down;
+            }
         }
     }
 
+	private void ProcessFiring()
+	{
+		if (canFire && isFiring)
+		{
+			Projectile projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
+			projectileCooldownCounter = ProjectileCooldownCounter();
+			StartCoroutine(projectileCooldownCounter);
+
+			switch (facing)
+			{
+				case Facing.Up:
+					projectile.direction = Vector2.up;
+					break;
+				case Facing.Down:
+					projectile.direction = Vector2.down;
+					break;
+				case Facing.Left:
+					projectile.direction = Vector2.left;
+					break;
+				case Facing.Right:
+					projectile.direction = Vector2.right;
+					break;
+			}
+		}
+	}
+
     private void UpdateAnimations()
     {
+        if (moveInput == Vector2.zero)
+        {
+            animator.SetBool("isIdle", true);
+        }
+        else
+        {
+            animator.SetBool("isIdle", false);
+        }
+
         switch (facing)
         {
             case Facing.Up:
@@ -101,23 +152,19 @@ public class PlayerController : MonoBehaviour
                 animator.SetInteger("Facing", (int)Facing.Right);
                 break;
         }
-
-        if(timeSinceLastInput > timeUntilIdle)
-        {
-            animator.SetBool("isIdle", true);
-        } 
-        else 
-        {
-            animator.SetBool("isIdle", false);
-        }
     }
 
-    public IEnumerator IncrementTimeSinceLastInput()
+    public IEnumerator ProjectileCooldownCounter()
     {
-        while (true)
+        canFire = false;
+        float cooldownCounter = projectileCooldown;
+
+        while (cooldownCounter > 0)
         {
-            timeSinceLastInput += Time.deltaTime;
+            cooldownCounter -= Time.deltaTime;
             yield return null;
         }
+
+        canFire = true;
     }
 }
