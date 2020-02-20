@@ -2,32 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerProjectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     public float speed = 8f;
-    public Vector2 direction = Vector2.zero;
-    public int damage = 10;
+    private Vector3 direction;
     public GameObject explodeEffect;
 
-    private Rigidbody2D rigidBody;
-    
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        direction = PlayerController.Instance.transform.position - transform.position;
+        direction.Normalize();
     }
 
     void Update()
     {
-        rigidBody.velocity = direction * speed;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         Instantiate(explodeEffect, transform.position, transform.rotation);
-
-        if(other.tag == "Enemy")
+        
+        if(other.tag == "Player")
         {
-            other.GetComponent<EnemyHealth>().TakeDamage(damage);
+            print("Player hit!");
         }
         
         Destroy(gameObject);

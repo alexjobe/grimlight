@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: c05b77593075f144e8de58b04b42d663
+guid: 8d91c7676c309024c9f395ff9602d45b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3335938368590028298
-    second: Player_Down
+      213: -1264879236344067857
+    second: Creature_0
   - first:
-      213: 8690493423127448644
-    second: Player_Up
+      213: -2835322701812867618
+    second: Creature_1
   - first:
-      213: 7854085430073032755
-    second: Player_Right
+      213: 3600043343915355334
+    second: Creature_2
   - first:
-      213: -1796082761614054225
-    second: Player_Left
+      213: 2329482133780685698
+    second: Creature_3
+  - first:
+      213: -257678292258943219
+    second: Creature_4
+  - first:
+      213: -3342055388025838027
+    second: Creature_5
+  - first:
+      213: -1295291690124007892
+    second: Creature_6
+  - first:
+      213: 3797655849766468412
+    second: Creature_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -72,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -84,7 +96,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -98,85 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Down
+      name: Creature_0
       rect:
         serializedVersion: 2
         x: 3
-        y: 32
+        y: 64
         width: 24
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc327ecf6607d964ea079ac8ab5202ee
-      internalID: 3335938368590028298
+      spriteID: fe8c1f1490f327ee0800000000000000
+      internalID: -1264879236344067857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Up
+      name: Creature_1
       rect:
         serializedVersion: 2
         x: 37
-        y: 32
+        y: 64
         width: 24
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf5633e6f242dad4b9096eb735b9ef7d
-      internalID: 8690493423127448644
+      spriteID: eddd7de5609e6a8d0800000000000000
+      internalID: -2835322701812867618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Right
+      name: Creature_2
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
+        x: 69
+        y: 64
         width: 22
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2aaf006af99c114ab60dd1138de49b2
-      internalID: 7854085430073032755
+      spriteID: 6cc8512f85ce5f130800000000000000
+      internalID: 3600043343915355334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Left
+      name: Creature_3
       rect:
         serializedVersion: 2
-        x: 37
-        y: 0
+        x: 101
+        y: 64
         width: 22
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 307802ff475b57440a829187a4246406
-      internalID: -1796082761614054225
+      spriteID: 283ed9698abf35020800000000000000
+      internalID: 2329482133780685698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature_4
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0f839b55fa8c6cf0800000000000000
+      internalID: -257678292258943219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature_5
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5362a01e452ae91d0800000000000000
+      internalID: -3342055388025838027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c26a4a11213360ee0800000000000000
+      internalID: -1295291690124007892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature_7
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 0
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3bb380efdbf3b430800000000000000
+      internalID: 3797655849766468412
       vertices: []
       indices: 
       edges: []

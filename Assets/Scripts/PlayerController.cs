@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 aimInput;
     private float activeMoveSpeed;
-    private bool canFire = true;
-    private bool isFiring = false;
+    private bool isProjectileOnCooldown = false;
+    private bool isTryingToFire = false;
     private IEnumerator projectileCooldownCounter;
 
     void Awake() 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateMovement();
-        UpdateAim();
+        UpdateFiringInput();
         UpdateFacing();
         ProcessFiring();
         UpdateAnimations();
@@ -64,18 +64,18 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = moveInput * activeMoveSpeed;
     }
 
-    private void UpdateAim()
+    private void UpdateFiringInput()
     {
         aimInput.x = Input.GetAxisRaw("HorizontalAim");
         aimInput.y = Input.GetAxisRaw("VerticalAim");
         aimInput.Normalize();
 
-        isFiring = aimInput != Vector2.zero ? true : false;
+        isTryingToFire = aimInput != Vector2.zero ? true : false;
     }
 
     private void UpdateFacing()
     {   
-        if(canFire)
+        if(!isProjectileOnCooldown)
         {
             if (aimInput.x > 0)
             {
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
 	private void ProcessFiring()
 	{
-		if (canFire && isFiring)
+		if (!isProjectileOnCooldown && isTryingToFire)
 		{
 			PlayerProjectile projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
 			projectileCooldownCounter = ProjectileCooldownCounter();
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ProjectileCooldownCounter()
     {
-        canFire = false;
+        isProjectileOnCooldown = true;
         float cooldownCounter = projectileCooldown;
 
         while (cooldownCounter > 0)
@@ -182,6 +182,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        canFire = true;
+        isProjectileOnCooldown = false;
     }
 }

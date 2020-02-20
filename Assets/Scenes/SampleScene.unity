@@ -300,15 +300,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2810856510397270982, guid: 8d810d67bda55884792a70d3ed52f7fa,
+    - target: {fileID: 1522752180921286198, guid: 8d810d67bda55884792a70d3ed52f7fa,
         type: 3}
-      propertyPath: shouldChase
+      propertyPath: projectileCooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2810856510397270982, guid: 8d810d67bda55884792a70d3ed52f7fa,
         type: 3}
       propertyPath: chaseAggroRange
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5504774838283226073, guid: 8d810d67bda55884792a70d3ed52f7fa,
         type: 3}

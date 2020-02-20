@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     public float moveSpeed = 2f;
-    public float chaseAggroRange = 10f;
+    public float chaseAggroRange = 7f;
     public bool shouldChase = true;
 
     private Rigidbody2D rigidBody;
