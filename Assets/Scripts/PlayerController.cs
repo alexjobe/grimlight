@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
 {
     public float normalMoveSpeed = 4f;
     public float projectileCooldown = 0.5f;
-    public Projectile projectileToFire;
+    public PlayerProjectile projectileToFire;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
+
+    private static PlayerController instance;
 
     private Facing facing;
     private Vector2 moveInput;
@@ -26,6 +28,16 @@ public class PlayerController : MonoBehaviour
     private bool canFire = true;
     private bool isFiring = false;
     private IEnumerator projectileCooldownCounter;
+
+    void Awake() 
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -104,7 +116,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (canFire && isFiring)
 		{
-			Projectile projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
+			PlayerProjectile projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
 			projectileCooldownCounter = ProjectileCooldownCounter();
 			StartCoroutine(projectileCooldownCounter);
 
@@ -153,6 +165,11 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    public static PlayerController Instance 
+    { 
+        get { return instance; } 
+    } 
 
     public IEnumerator ProjectileCooldownCounter()
     {

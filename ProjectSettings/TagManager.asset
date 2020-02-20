@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Player Projectiles
+  - Enemies
+  - Enemy Projectiles
+  - Ignore Projectiles
   - 
   - 
   - 
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3785015337
+    locked: 0
+  - name: Objects
+    uniqueID: 2153374953
+    locked: 0
+  - name: Pickups
+    uniqueID: 2279997771
+    locked: 0
+  - name: Enemies
+    uniqueID: 1290376563
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1265278139
+    locked: 0
+  - name: Player
+    uniqueID: 3610318983
     locked: 0
