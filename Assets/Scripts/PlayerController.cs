@@ -13,6 +13,9 @@ enum Facing
 public class PlayerController : MonoBehaviour
 {
     public float normalMoveSpeed = 4f;
+    public float dashMoveSpeed = 8f;
+    public float dashDuration= 0.5f;
+    public float dashCooldown = 2f;
     public float projectileCooldown = 0.5f;
     public PlayerProjectile projectileToFire;
 
@@ -27,7 +30,11 @@ public class PlayerController : MonoBehaviour
     private float activeMoveSpeed;
     private bool isProjectileOnCooldown = false;
     private bool isTryingToFire = false;
+    private bool isDashing = false;
+	private bool isDashOnCooldown = false;
     private IEnumerator projectileCooldownCounter;
+  	private IEnumerator dashDurationCounter;
+    private IEnumerator dashCooldownCounter;
 
     void Awake() 
     {
@@ -51,6 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMovement();
         UpdateFiringInput();
+		UpdateDashInput();
         UpdateFacing();
         ProcessFiring();
         UpdateAnimations();
@@ -71,6 +79,21 @@ public class PlayerController : MonoBehaviour
         aimInput.Normalize();
 
         isTryingToFire = aimInput != Vector2.zero ? true : false;
+    }
+
+    private void UpdateDashInput()
+    {
+		if(!isDashOnCooldown)
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				activeMoveSpeed = dashMoveSpeed;
+				dashDurationCounter = DashDurationCounter();
+				dashCooldownCounter = DashCooldownCounter();
+				StartCoroutine(dashDurationCounter);
+				StartCoroutine(dashCooldownCounter);
+			}
+		}
     }
 
     private void UpdateFacing()
@@ -114,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
 	private void ProcessFiring()
 	{
-		if (!isProjectileOnCooldown && isTryingToFire)
+		if (!isProjectileOnCooldown && !isDashing && isTryingToFire)
 		{
 			PlayerProjectile projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
 			projectileCooldownCounter = ProjectileCooldownCounter();
@@ -140,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        if (moveInput == Vector2.zero)
+        if (moveInput == Vector2.zero && !isDashing)
         {
             animator.SetBool("isIdle", true);
         }
@@ -148,6 +171,15 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isIdle", false);
         }
+
+		if (isDashing)
+		{
+			animator.SetBool("isDashing", true);
+		}
+		else
+		{
+			animator.SetBool("isDashing", false);
+		}
 
         switch (facing)
         {
@@ -184,4 +216,33 @@ public class PlayerController : MonoBehaviour
 
         isProjectileOnCooldown = false;
     }
+
+	public IEnumerator DashDurationCounter()
+	{
+		isDashing = true;
+		float durationCounter = 0f;
+
+		while (durationCounter < dashDuration)
+		{
+      		durationCounter += Time.deltaTime;
+			yield return null;
+		}
+
+		activeMoveSpeed = normalMoveSpeed;
+		isDashing = false;
+	}
+
+	public IEnumerator DashCooldownCounter()
+	{
+		isDashOnCooldown = true;
+		float cooldownCounter = dashCooldown;
+
+		while (cooldownCounter > 0)
+		{
+			cooldownCounter -= Time.deltaTime;
+			yield return null;
+		}
+
+		isDashOnCooldown = false;
+	}
 }

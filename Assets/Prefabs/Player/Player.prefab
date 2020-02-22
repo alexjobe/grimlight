@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1631408893}
   - component: {fileID: 1631408894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3376157432341507276}
   - component: {fileID: 3376157432341507267}
   - component: {fileID: 1567495738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -167,8 +167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalMoveSpeed: 4
+  dashMoveSpeed: 8
+  dashDuration: 2
+  dashCooldown: 5
   projectileCooldown: 0.5
-  projectileToFire: {fileID: 0}
+  projectileToFire: {fileID: 1193801707, guid: 2d3f98c83ad9d203d9f7b88cf65cb074, type: 3}
 --- !u!95 &1567495738
 Animator:
   serializedVersion: 3
