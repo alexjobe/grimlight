@@ -36,12 +36,19 @@ public class PlayerController : MonoBehaviour
   	private IEnumerator dashDurationCounter;
     private IEnumerator dashCooldownCounter;
 
+    public static PlayerController Instance
+    {
+        get { return instance; }
+    }
+
     void Awake() 
     {
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
-        } else {
+        } 
+        else 
+        {
             instance = this;
         }
     }
@@ -197,11 +204,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-
-    public static PlayerController Instance 
-    { 
-        get { return instance; } 
-    } 
 
     public IEnumerator ProjectileCooldownCounter()
     {

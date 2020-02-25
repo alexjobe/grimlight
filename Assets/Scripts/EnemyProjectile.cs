@@ -25,7 +25,7 @@ public class EnemyProjectile : MonoBehaviour
         
         if(other.tag == "Player")
         {
-            print("Player hit!");
+            PlayerHealthController.Instance.DamagePlayer();
         }
         
         Destroy(gameObject);
