@@ -9,6 +9,7 @@ public class PlayerHealthController : MonoBehaviour
     public int currentHealth { get; private set; }
 
     private static PlayerHealthController instance;
+    private PlayerController playerInstance;
 
     public static PlayerHealthController Instance
     {
@@ -29,6 +30,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Start()
     {
+        playerInstance = PlayerController.Instance;
         currentHealth = maxHearts * HEALTH_PER_HEART;
     }
 
@@ -38,7 +40,7 @@ public class PlayerHealthController : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            PlayerController.Instance.gameObject.SetActive(false);
+            playerInstance.gameObject.SetActive(false);
         }
     }
 }

@@ -8,9 +8,15 @@ public class PlayerShooter : MonoBehaviour
     public PlayerProjectile projectileToFire;
     public GameObject fireSpot;
 
+    private PlayerController playerInstance;
+
     private Vector2 aimInput;
     private bool isTryingToFire = false;
     private IEnumerator projectileCooldownCounter;
+
+    private void Start() {
+        playerInstance = PlayerController.Instance;
+    }
 
     private void Update()
     {
@@ -20,7 +26,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void UpdateFiringInput()
     {
-        if (!PlayerController.Instance.isInMelee)
+        if (!playerInstance.isInMelee)
         {
             aimInput = new Vector2(Input.GetAxisRaw("HorizontalAim"), Input.GetAxisRaw("VerticalAim"));
             aimInput.Normalize();
@@ -31,30 +37,30 @@ public class PlayerShooter : MonoBehaviour
 
     private void FaceTowardsAim()
     {
-        if(!PlayerController.Instance.isProjectileOnCooldown)
+        if(!playerInstance.isProjectileOnCooldown)
         {
             if (aimInput.x > 0)
             {
-                PlayerController.Instance.facing = Facing.Right;
+                playerInstance.facing = Facing.Right;
             }
             else if (aimInput.x < 0)
             {
-                PlayerController.Instance.facing = Facing.Left;
+                playerInstance.facing = Facing.Left;
             }
             else if (aimInput.y < 0)
             {
-                PlayerController.Instance.facing = Facing.Up;
+                playerInstance.facing = Facing.Up;
             }
             else if (aimInput.y > 0)
             {
-                PlayerController.Instance.facing = Facing.Down;
+                playerInstance.facing = Facing.Down;
             }
         }
     }
 
     private void ProcessFiring()
     {
-        if (!PlayerController.Instance.isProjectileOnCooldown && !PlayerController.Instance.isDashing && isTryingToFire)
+        if (!playerInstance.isProjectileOnCooldown && !playerInstance.isDashing && isTryingToFire)
         {
             PlayerProjectile projectile = Instantiate(projectileToFire, fireSpot.transform.position, fireSpot.transform.rotation);
             projectileCooldownCounter = ProjectileCooldownCounter();
@@ -67,7 +73,7 @@ public class PlayerShooter : MonoBehaviour
     {
         Vector2 direction;
 
-        switch (PlayerController.Instance.facing)
+        switch (playerInstance.facing)
         {
             case Facing.Up:
                 direction = Vector2.up;
@@ -88,7 +94,7 @@ public class PlayerShooter : MonoBehaviour
 
     public IEnumerator ProjectileCooldownCounter()
     {
-        PlayerController.Instance.isProjectileOnCooldown = true;
+        playerInstance.isProjectileOnCooldown = true;
         float cooldownCounter = projectileCooldown;
 
         while (cooldownCounter > 0)
@@ -97,6 +103,6 @@ public class PlayerShooter : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.isProjectileOnCooldown = false;
+        playerInstance.isProjectileOnCooldown = false;
     }
 }

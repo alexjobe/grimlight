@@ -9,6 +9,7 @@ public class PlayerMelee : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private Animator animator;
+    private PlayerController playerInstance;
 
     private IEnumerator meleeDurationCounter;
     private IEnumerator meleeCooldownCounter;
@@ -17,6 +18,7 @@ public class PlayerMelee : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerInstance = PlayerController.Instance;
     }
 
     private void Update()
@@ -26,12 +28,12 @@ public class PlayerMelee : MonoBehaviour
 
     private void UpdateMeleeInput()
     {
-        if (!PlayerController.Instance.isMeleeOnCooldown)
+        if (!playerInstance.isMeleeOnCooldown)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 rigidBody.velocity = Vector2.zero;
-                PlayerController.Instance.facing = Facing.Down;
+                playerInstance.facing = Facing.Down;
                 animator.SetTrigger("meleeTrigger");
                 meleeDurationCounter = MeleeDurationCounter();
                 meleeCooldownCounter = MeleeCooldownCounter();
@@ -43,7 +45,7 @@ public class PlayerMelee : MonoBehaviour
 
     public IEnumerator MeleeDurationCounter()
     {
-        PlayerController.Instance.isInMelee = true;
+        playerInstance.isInMelee = true;
         float durationCounter = 0f;
 
         while (durationCounter < meleeDuration)
@@ -52,12 +54,12 @@ public class PlayerMelee : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.isInMelee = false;
+        playerInstance.isInMelee = false;
     }
 
     public IEnumerator MeleeCooldownCounter()
     {
-        PlayerController.Instance.isMeleeOnCooldown = true;
+        playerInstance.isMeleeOnCooldown = true;
         float cooldownCounter = meleeCooldown;
 
         while (cooldownCounter > 0)
@@ -66,6 +68,6 @@ public class PlayerMelee : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.isMeleeOnCooldown = false;
+        playerInstance.isMeleeOnCooldown = false;
     }
 }

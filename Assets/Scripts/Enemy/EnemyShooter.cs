@@ -10,17 +10,20 @@ public class EnemyShooter : MonoBehaviour
     public EnemyProjectile projectileToFire;
 
     private SpriteRenderer spriteRenderer;
+    private PlayerController playerInstance;
+
     private IEnumerator projectileCooldownCounter;
     private bool isProjectileOnCooldown = false;
 
     private void Start()
     {
+        playerInstance = PlayerController.Instance;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        if(spriteRenderer.isVisible && PlayerController.Instance.gameObject.activeInHierarchy) 
+        if(spriteRenderer.isVisible && playerInstance.gameObject.activeInHierarchy) 
         {
             TryToFire();
         }
@@ -29,7 +32,7 @@ public class EnemyShooter : MonoBehaviour
     private void TryToFire()
     {
         if (shouldFire && !isProjectileOnCooldown && Vector2.Distance(transform.position, 
-            PlayerController.Instance.transform.position) < projectileAggroRange)
+            playerInstance.transform.position) < projectileAggroRange)
         {
             Fire();
         }

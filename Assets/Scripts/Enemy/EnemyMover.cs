@@ -11,6 +11,7 @@ public class EnemyMover : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private PlayerController playerInstance;
     
     private Vector2 moveDirection;
 
@@ -19,6 +20,7 @@ public class EnemyMover : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerInstance = PlayerController.Instance;
     }
 
     private void Update()
@@ -28,12 +30,12 @@ public class EnemyMover : MonoBehaviour
 
     private void UpdateMovement()
     {
-        if (shouldChase && PlayerController.Instance.gameObject.activeInHierarchy)
+        if (shouldChase && playerInstance.gameObject.activeInHierarchy)
         {
-            if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < chaseAggroRange)
+            if (Vector2.Distance(transform.position, playerInstance.transform.position) < chaseAggroRange)
             {
                 animator.SetBool("isChasing", true);
-                moveDirection = PlayerController.Instance.transform.position - transform.position;
+                moveDirection = playerInstance.transform.position - transform.position;
             }
             else
             {

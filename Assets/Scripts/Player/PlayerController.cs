@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public bool isMeleeOnCooldown { get; set; } = false;
 
     private static PlayerController instance;
-    private Animator animator;
 
     public static PlayerController Instance
     {
@@ -46,49 +45,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
         facing = Facing.Down;
-    }
-
-    private void Update()
-    {
-        UpdateAnimations();
-    }
-
-    private void UpdateAnimations()
-    {
-        if (isIdle)
-        {
-            animator.SetBool("isIdle", true);
-        }
-        else
-        {
-            animator.SetBool("isIdle", false);
-        }
-
-        if (PlayerController.Instance.isDashing)
-        {
-            animator.SetBool("isDashing", true);
-        }
-        else
-        {
-            animator.SetBool("isDashing", false);
-        }
-
-        switch (PlayerController.Instance.facing)
-        {
-            case Facing.Up:
-                animator.SetInteger("Facing", (int)Facing.Up);
-                break;
-            case Facing.Down:
-                animator.SetInteger("Facing", (int)Facing.Down);
-                break;
-            case Facing.Left:
-                animator.SetInteger("Facing", (int)Facing.Left);
-                break;
-            case Facing.Right:
-                animator.SetInteger("Facing", (int)Facing.Right);
-                break;
-        }
     }
 }

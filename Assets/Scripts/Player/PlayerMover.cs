@@ -10,6 +10,7 @@ public class PlayerMover : MonoBehaviour
     public float dashCooldown = 2f;
 
     private Rigidbody2D rigidBody;
+    private PlayerController playerInstance;
 
     private Vector2 moveInput;
     private float activeMoveSpeed;
@@ -20,6 +21,7 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        playerInstance = PlayerController.Instance;
         activeMoveSpeed = normalMoveSpeed;
     }
 
@@ -32,20 +34,20 @@ public class PlayerMover : MonoBehaviour
 
     private void UpdateMovement()
     {
-        if (!PlayerController.Instance.isInMelee)
+        if (!playerInstance.isInMelee)
         {
             moveInput.x = Input.GetAxisRaw("HorizontalMove");
             moveInput.y = Input.GetAxisRaw("VerticalMove");
             moveInput.Normalize();
             rigidBody.velocity = moveInput * activeMoveSpeed;
 
-            PlayerController.Instance.isIdle = rigidBody.velocity == Vector2.zero ? true : false;
+            playerInstance.isIdle = rigidBody.velocity == Vector2.zero ? true : false;
         }
     }
 
     private void UpdateDashInput()
     {
-        if (!PlayerController.Instance.isInMelee && !PlayerController.Instance.isDashOnCooldown)
+        if (!playerInstance.isInMelee && !playerInstance.isDashOnCooldown)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -60,30 +62,30 @@ public class PlayerMover : MonoBehaviour
 
     private void UpdateFacing()
     {
-        if (!PlayerController.Instance.isProjectileOnCooldown && !PlayerController.Instance.isInMelee)
+        if (!playerInstance.isProjectileOnCooldown && !playerInstance.isInMelee)
         {
             if (moveInput.x > 0)
             {
-                PlayerController.Instance.facing = Facing.Right;
+                playerInstance.facing = Facing.Right;
             }
             else if (moveInput.x < 0)
             {
-                PlayerController.Instance.facing = Facing.Left;
+                playerInstance.facing = Facing.Left;
             }
             else if (moveInput.y > 0)
             {
-                PlayerController.Instance.facing = Facing.Up;
+                playerInstance.facing = Facing.Up;
             }
             else if (moveInput.y < 0)
             {
-                PlayerController.Instance.facing = Facing.Down;
+                playerInstance.facing = Facing.Down;
             }
         }
     }
 
     public IEnumerator DashDurationCounter()
     {
-        PlayerController.Instance.isDashing = true;
+        playerInstance.isDashing = true;
         float durationCounter = 0f;
 
         while (durationCounter < dashDuration)
@@ -93,12 +95,12 @@ public class PlayerMover : MonoBehaviour
         }
 
         activeMoveSpeed = normalMoveSpeed;
-        PlayerController.Instance.isDashing = false;
+        playerInstance.isDashing = false;
     }
 
     public IEnumerator DashCooldownCounter()
     {
-        PlayerController.Instance.isDashOnCooldown = true;
+        playerInstance.isDashOnCooldown = true;
         float cooldownCounter = dashCooldown;
 
         while (cooldownCounter > 0)
@@ -107,6 +109,6 @@ public class PlayerMover : MonoBehaviour
             yield return null;
         }
 
-        PlayerController.Instance.isDashOnCooldown = false;
+        playerInstance.isDashOnCooldown = false;
     }
 }
