@@ -10,18 +10,18 @@ public class PlayerProjectile : MonoBehaviour
     public GameObject explodeEffect;
 
     private Rigidbody2D rigidBody;
-    
-    void Start()
+
+    private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         rigidBody.velocity = direction * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         Instantiate(explodeEffect, transform.position, transform.rotation);
 

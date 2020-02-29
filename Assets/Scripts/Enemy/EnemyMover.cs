@@ -14,14 +14,14 @@ public class EnemyMover : MonoBehaviour
     
     private Vector2 moveDirection;
 
-    void Start()
+    private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateMovement();
     }

@@ -26,6 +26,36 @@ TextureImporter:
   - first:
       213: 3797655849766468412
     second: Creature_7
+  - first:
+      213: 8024784078061614633
+    second: Creature_8
+  - first:
+      213: 1142843026793269555
+    second: Creature_0
+  - first:
+      213: 8929603020603466833
+    second: Creature_1
+  - first:
+      213: 7379306522790590800
+    second: Creature_2
+  - first:
+      213: 8264850070154331880
+    second: Creature_3
+  - first:
+      213: -7121137244791627648
+    second: Creature_4
+  - first:
+      213: 5075195130039771089
+    second: Creature_5
+  - first:
+      213: 3763973201039490301
+    second: Creature_6
+  - first:
+      213: -5532181948968545330
+    second: Creature_7
+  - first:
+      213: 9180493598855741294
+    second: Creature_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -84,10 +114,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,10 +126,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 128
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,19 +143,19 @@ TextureImporter:
       name: Creature_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 64
+        x: 20
+        y: 144
         width: 24
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe8c1f1490f327ee0800000000000000
-      internalID: -1264879236344067857
+      spriteID: 3398b068da13cdf00800000000000000
+      internalID: 1142843026793269555
       vertices: []
       indices: 
       edges: []
@@ -134,19 +164,19 @@ TextureImporter:
       name: Creature_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 64
+        x: 84
+        y: 144
         width: 24
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eddd7de5609e6a8d0800000000000000
-      internalID: -2835322701812867618
+      spriteID: 154235cd2a25ceb70800000000000000
+      internalID: 8929603020603466833
       vertices: []
       indices: 
       edges: []
@@ -155,19 +185,19 @@ TextureImporter:
       name: Creature_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 64
+        x: 149
+        y: 144
         width: 22
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cc8512f85ce5f130800000000000000
-      internalID: 3600043343915355334
+      spriteID: 059f7ab6f20986660800000000000000
+      internalID: 7379306522790590800
       vertices: []
       indices: 
       edges: []
@@ -176,19 +206,19 @@ TextureImporter:
       name: Creature_3
       rect:
         serializedVersion: 2
-        x: 101
-        y: 64
-        width: 22
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 22
+        y: 75
+        width: 19
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 283ed9698abf35020800000000000000
-      internalID: 2329482133780685698
+      spriteID: 8e649698955a2b270800000000000000
+      internalID: 8264850070154331880
       vertices: []
       indices: 
       edges: []
@@ -197,19 +227,19 @@ TextureImporter:
       name: Creature_4
       rect:
         serializedVersion: 2
-        x: 6
-        y: 0
+        x: 86
+        y: 75
         width: 19
         height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f839b55fa8c6cf0800000000000000
-      internalID: -257678292258943219
+      spriteID: 080246fb763ac2d90800000000000000
+      internalID: -7121137244791627648
       vertices: []
       indices: 
       edges: []
@@ -218,19 +248,19 @@ TextureImporter:
       name: Creature_5
       rect:
         serializedVersion: 2
-        x: 39
-        y: 0
+        x: 150
+        y: 75
         width: 19
         height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5362a01e452ae91d0800000000000000
-      internalID: -3342055388025838027
+      spriteID: 1df10dbc417be6640800000000000000
+      internalID: 5075195130039771089
       vertices: []
       indices: 
       edges: []
@@ -239,19 +269,19 @@ TextureImporter:
       name: Creature_6
       rect:
         serializedVersion: 2
-        x: 72
-        y: 0
+        x: 22
+        y: 11
         width: 19
         height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c26a4a11213360ee0800000000000000
-      internalID: -1295291690124007892
+      spriteID: dfc7c081fa15c3430800000000000000
+      internalID: 3763973201039490301
       vertices: []
       indices: 
       edges: []
@@ -260,10 +290,10 @@ TextureImporter:
       name: Creature_7
       rect:
         serializedVersion: 2
-        x: 101
+        x: 64
         y: 0
-        width: 19
-        height: 43
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +301,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3bb380efdbf3b430800000000000000
-      internalID: 3797655849766468412
+      spriteID: ec3d6e204ddb933b0800000000000000
+      internalID: -5532181948968545330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Creature_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6f3b8ea94aa76f70800000000000000
+      internalID: 9180493598855741294
       vertices: []
       indices: 
       edges: []

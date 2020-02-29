@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-    public static PlayerHealthController instance;
-
     public const int HEALTH_PER_HEART = 4;
-
     public int maxHearts = 1;
-
     public int currentHealth { get; private set; }
+
+    private static PlayerHealthController instance;
 
     public static PlayerHealthController Instance
     {
         get { return instance; }
     }
 
-    void Awake()
+    private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -29,14 +27,9 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHearts * HEALTH_PER_HEART;
-    }
-
-    void Update()
-    {
-        
     }
 
     public void DamagePlayer(int damage = 1)

@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 50;
+    
     private int health;
 
-    void Start()
+    private void Start()
     {
         health = startingHealth;
     }

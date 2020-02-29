@@ -5,16 +5,17 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
     public float speed = 8f;
-    private Vector3 direction;
     public GameObject explodeEffect;
 
-    void Start()
+    private Vector3 direction;
+
+    private void Start()
     {
         direction = PlayerController.Instance.transform.position - transform.position;
         direction.Normalize();
     }
 
-    void Update()
+    private void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
     }

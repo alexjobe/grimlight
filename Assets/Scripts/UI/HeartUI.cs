@@ -17,14 +17,14 @@ public class HeartUI : MonoBehaviour
     private int numFullHearts = 1;
     private int numHeartFourths = 0;
 
-    void Start()
+    private void Start()
     {
         // TODO: Make health per heart changeable in editor
         Debug.Assert(PlayerHealthController.HEALTH_PER_HEART == 4, "Health per heart must be 4!");
         Debug.Assert(PlayerHealthController.Instance.maxHearts <= 10, "Max hearts cannot exceed 10!");
     }
 
-    void Update()
+    private void Update()
     {
         if(PlayerHealthController.Instance != null)
         {
