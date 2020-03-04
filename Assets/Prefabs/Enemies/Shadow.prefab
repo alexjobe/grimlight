@@ -248,9 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998fe8a4361ed1b409056026cd2b88e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  chaseMoveSpeed: 2
   chaseAggroRange: 8
   shouldChase: 1
+  knockBackSpeed: 3
+  knockBackDuration: 0.1
 --- !u!114 &8971017872231861380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldFire: 1
   projectileAggroRange: 10
-  projectileCooldown: 0.5
+  projectileCooldown: 1
   projectileToFire: {fileID: 5734284234374312829, guid: abd524a8b60112043a5d74b07d7c6926,
     type: 3}

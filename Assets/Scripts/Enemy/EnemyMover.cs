@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    public float chaseMoveSpeed = 2f;
     public float chaseAggroRange = 7f;
     public bool shouldChase = true;
+
+    public float knockBackSpeed = 3f;
+    public float knockBackDuration = 0.1f;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -14,6 +17,9 @@ public class EnemyMover : MonoBehaviour
     private PlayerController playerInstance;
     
     private Vector2 moveDirection;
+    private float currentMoveSpeed;
+    private bool isKnockedBack = false;
+    private IEnumerator knockBackDurationCounter;
 
     private void Start()
     {
@@ -26,30 +32,62 @@ public class EnemyMover : MonoBehaviour
     private void Update()
     {
         UpdateMovement();
+        rigidBody.velocity = moveDirection * currentMoveSpeed;
     }
 
     private void UpdateMovement()
     {
-        if (shouldChase && playerInstance.gameObject.activeInHierarchy)
+        if(isKnockedBack)
         {
-            if (Vector2.Distance(transform.position, playerInstance.transform.position) < chaseAggroRange)
-            {
-                animator.SetBool("isChasing", true);
-                moveDirection = playerInstance.transform.position - transform.position;
-            }
-            else
-            {
-                animator.SetBool("isChasing", false);
-                moveDirection = Vector2.zero;
-            }
-
-            moveDirection.Normalize();
-            rigidBody.velocity = moveDirection * moveSpeed;
+            currentMoveSpeed = knockBackSpeed;
+        }
+        else if (shouldChase && playerInstance.gameObject.activeInHierarchy)
+        {
+            ChasePlayer();
         }
         else
         {
             animator.SetBool("isChasing", false);
-            rigidBody.velocity = Vector2.zero;
+            currentMoveSpeed = 0f;
         }
+    }
+
+    private void ChasePlayer()
+    {
+        if (Vector2.Distance(transform.position, playerInstance.transform.position) < chaseAggroRange)
+        {
+            animator.SetBool("isChasing", true);
+            moveDirection = playerInstance.transform.position - transform.position;
+        }
+        else
+        {
+            animator.SetBool("isChasing", false);
+            moveDirection = Vector2.zero;
+        }
+
+        currentMoveSpeed = chaseMoveSpeed;
+        moveDirection.Normalize();
+    }
+
+    public void KnockBack(Vector3 sourceOfKnockback)
+    {
+        moveDirection = transform.position - sourceOfKnockback;
+        moveDirection.Normalize();
+        knockBackDurationCounter = KnockBackDurationCounter();
+        StartCoroutine(knockBackDurationCounter);
+    }
+
+    public IEnumerator KnockBackDurationCounter()
+    {
+        isKnockedBack = true;
+        float durationCounter = 0f;
+
+        while (durationCounter < knockBackDuration)
+        {
+            durationCounter += Time.deltaTime;
+            yield return null;
+        }
+
+        isKnockedBack = false;
     }
 }

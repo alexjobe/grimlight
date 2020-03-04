@@ -18,8 +18,11 @@ public class PlayerMelee : MonoBehaviour
     private IEnumerator meleeDurationCounter;
     private IEnumerator meleeCooldownCounter;
 
+    private HashSet<int> alreadyDamagedEnemies;
+
     private void Start()
     {
+        alreadyDamagedEnemies = new HashSet<int>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerInstance = PlayerController.Instance;
@@ -28,6 +31,11 @@ public class PlayerMelee : MonoBehaviour
     private void Update()
     {
         UpdateMeleeInput();
+
+        if(playerInstance.isInMelee)
+        {
+            DamageEnemies();
+        }
     }
 
     private void UpdateMeleeInput()
@@ -43,11 +51,11 @@ public class PlayerMelee : MonoBehaviour
 
     private void StartMeleeAttack()
     {
+        alreadyDamagedEnemies.Clear();
+        animator.SetTrigger("meleeAttackTrigger");
         meleeZone.SetActive(true);
         playerInstance.facing = Facing.Down;
-        DamageEnemies();
         rigidBody.velocity = Vector2.zero;
-        animator.SetTrigger("meleeTrigger");
         meleeDurationCounter = MeleeDurationCounter();
         meleeCooldownCounter = MeleeCooldownCounter();
         StartCoroutine(meleeDurationCounter);
@@ -60,7 +68,13 @@ public class PlayerMelee : MonoBehaviour
 
         foreach (Collider2D enemy in enemiesToDamage)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            // Only damage an enemy once per attack
+            if(!alreadyDamagedEnemies.Contains(enemy.GetInstanceID()))
+            {
+                alreadyDamagedEnemies.Add(enemy.GetInstanceID());
+                enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+                enemy.GetComponent<EnemyMover>().KnockBack(transform.position);
+            }
         }
     }
 
